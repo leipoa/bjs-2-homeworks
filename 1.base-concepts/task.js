@@ -6,10 +6,10 @@ function solveEquation(a, b, c) {
   if (D < 0) return arr;
   if (D == 0) arr = (-b + Math.sqrt(D)) / (2 * a);
   else if (D > 0) {
-    let arr = [];
-    arr.push((-b + Math.sqrt(D)) / (2 * a));
-    arr.push((-b - Math.sqrt(D)) / (2 * a));
-    roots = arr;
+    let roots = [];
+    roots.push((-b + Math.sqrt(D)) / (2 * a));
+    roots.push((-b - Math.sqrt(D)) / (2 * a));
+    arr = roots;
   }
   return arr;
 }
@@ -19,8 +19,8 @@ function calculateTotalMortgage(percent, contribution, amount, countMonths) {
   let creditBody = amount - contribution;
   let monthPayment =
     creditBody *
-    (monthPercent +
-      (monthPercent / (Math.pow(1 + monthPercent), countMonths) - 1));
-  let sum = (contribution + creditBody + monthPayment);
+    (monthPercent + (monthPercent / (1 + monthPercent) ** countMonths - 1));
+  let sum = contribution + creditBody + monthPayment * countMonths;
   return +sum.toFixed(2);
 }
+console.log(calculateTotalMortgage(10, 1000, 50000, 12));
